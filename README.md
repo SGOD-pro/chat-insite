@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ChatInsite
+
+ChatInsite is an advanced search tool for your WhatsApp group chat. It allows you to search through your chat history by sender, date, and time. Simply upload your group chat in `.txt` format, and ChatInsite will do the rest.
+
+## Features
+
+- **Search by Sender**: Find messages sent by a specific person.
+- **Search by Date**: Filter messages by a specific date or date range.
+- **Search by Time**: Narrow down messages by a specific time or time range.
+- **Upload Group Chat**: Upload your WhatsApp group chat in `.txt` format for easy searching.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Python 3.7+
+- Required Python packages (listed in `requirements.txt`)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/yourusername/chatinsite.git
+    cd chatinsite
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Install the dependencies:
+    ```sh
+    npm install
+    ```
 
-## Learn More
+### Usage
 
-To learn more about Next.js, take a look at the following resources:
+1. Run the application:
+    ```sh
+    npm run build
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Upload your WhatsApp group chat in `.txt` format when prompted.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Use the search features to find specific messages based on sender, date, or time.
