@@ -15,15 +15,17 @@ interface DatePicker {
 	className?: React.HTMLAttributes<HTMLDivElement>;
 	date: DateRange|undefined;
 	setDate: SelectRangeEventHandler;
+	disabled: boolean;
 }
 function DatePickerWithRange({
 	className,
 	date,
 	setDate,
+	disabled
 }: DatePicker) {
 	return (
 		<div className={cn("grid gap-2", className)}>
-			<Popover>
+			<Popover >
 				<PopoverTrigger asChild>
 					<Button
 						id="date"
@@ -32,6 +34,7 @@ function DatePickerWithRange({
 							"w-[250px] justify-start text-left font-normal",
 							!date && "text-muted-foreground"
 						)}
+						disabled={disabled}
 					>
 						<CalendarIcon className="mr-2 h-4 w-4" />
 						{date?.from ? (

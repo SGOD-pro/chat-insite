@@ -38,44 +38,47 @@ function TableDemo({ data }: { data: DataInterface[] }) {
 
 	const queryResult = () => {
 		if (name?.trim()) {
-		  const escapedInput = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escape special characters
-		  const regexPattern = new RegExp(`\\b${escapedInput}\\b`, "i");
-	  
-		  const results = data.filter((item) => {
-			const matchesName = regexPattern.test(item.name);
-			const matchesTime = time ? time >= item.time : true;
-			const matchesDate = date && date.to && date.from ? (() => {
-			  const itemDate = new Date(item.date).getTime();
-			  const fromDate = new Date(date.from).getTime();
-			  const toDate = new Date(date.to).getTime();
-			  return itemDate >= fromDate && itemDate <= toDate;
-			})() : true;
-			return matchesName && matchesTime && matchesDate;
-		  });
-	  
-		  setshowData(results);
-		  console.log(results);
+			const escapedInput = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escape special characters
+			const regexPattern = new RegExp(`\\b${escapedInput}\\b`, "i");
+
+			const results = data.filter((item) => {
+				const matchesName = regexPattern.test(item.name);
+				const matchesTime = time ? time >= item.time : true;
+				const matchesDate =
+					date && date.to && date.from
+						? (() => {
+								const itemDate = new Date(item.date).getTime();
+								const fromDate = new Date(date.from).getTime();
+								const toDate = new Date(date.to).getTime();
+								return itemDate >= fromDate && itemDate <= toDate;
+						  })()
+						: true;
+				return matchesName && matchesTime && matchesDate;
+			});
+
+			setshowData(results);
+			console.log(results);
 		} else if (date && date.to && date.from) {
-		  const fromDate = new Date(date.from).getTime();
-		  const toDate = new Date(date.to).getTime();
-	  
-		  const results = data.filter((item) => {
-			const itemDate = new Date(item.date).getTime();
-			const matchesTime = time ? time >= item.time : true;
-			return itemDate >= fromDate && itemDate <= toDate && matchesTime;
-		  });
-	  
-		  setshowData(results);
-		  console.log(results);
+			const fromDate = new Date(date.from).getTime();
+			const toDate = new Date(date.to).getTime();
+
+			const results = data.filter((item) => {
+				const itemDate = new Date(item.date).getTime();
+				const matchesTime = time ? time >= item.time : true;
+				return itemDate >= fromDate && itemDate <= toDate && matchesTime;
+			});
+
+			setshowData(results);
+			console.log(results);
 		} else if (time) {
-		  const results = data.filter((item) => time >= item.time);
-		  setshowData(results);
-		  console.log(results);
+			const results = data.filter((item) => time >= item.time);
+			setshowData(results);
+			console.log(results);
 		} else {
-		  setshowData(data);
+			setshowData(data);
 		}
-	  };
-	  
+	};
+
 	const throttledQueryResult = throttle(queryResult, 650);
 	const searchByName = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setName(e.target.value);
@@ -106,7 +109,11 @@ function TableDemo({ data }: { data: DataInterface[] }) {
 					</TableHead>
 					<TableHead>
 						<div className="w-[240px]">
-							<DatePickerWithRange date={date} setDate={setDate} />
+							<DatePickerWithRange
+								date={date}
+								setDate={setDate}
+								disabled={data.length === 0}
+							/>
 						</div>
 					</TableHead>
 					<TableHead>
@@ -116,6 +123,7 @@ function TableDemo({ data }: { data: DataInterface[] }) {
 								onChange={(e) => {
 									setTime(e.target.value);
 								}}
+								disabled={data.length === 0}
 								value={time}
 							/>
 						</div>
@@ -126,9 +134,10 @@ function TableDemo({ data }: { data: DataInterface[] }) {
 							size={"icon"}
 							onClick={() => {
 								setshowData(data);
-								setDate(undefined)
-								setTime("")
+								setDate(undefined);
+								setTime("");
 							}}
+							disabled={data.length === 0}
 							className="sticky top-0 right-0"
 						>
 							<ReloadIcon />
